@@ -4,12 +4,15 @@ const form=document.getElementById('send-container')
 const MessageInput=document.getElementById('messageInput')
 var messageContainer=document.querySelector('.container')
 
+var audio=new Audio("chat.mp3");
 const append=(message,position)=>{
     const messageElement=document.createElement('div');
     messageElement.innerText=message;
     messageElement.classList.add('message')
     messageElement.classList.add(position)
     messageContainer.append(messageElement);
+    if(position=="left")
+        audio.play();
 }
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
@@ -31,5 +34,5 @@ socket.on('recieve',data=>{
 })
 
 socket.on('left',name=>{
-    append(`${data.name} left the chat` ,"left")
+    append(`${name} left the chat` ,"left")
 })
